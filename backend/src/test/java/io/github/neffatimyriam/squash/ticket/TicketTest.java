@@ -14,4 +14,20 @@ class TicketTest {
         assertEquals("Login button broken", ticket.getTitle());
         assertEquals("Nothing happens when clicking Login", ticket.getDescription());
     }
+
+    @Test
+    void newTicketIsOpenWithMediumPriorityByDefault() {
+        Ticket ticket = new Ticket(1L, "Login button broken", "Nothing happens when clicking Login");
+
+        assertEquals(TicketStatus.OPEN, ticket.getStatus());
+        assertEquals(TicketPriority.MEDIUM, ticket.getPriority());
+    }
+
+    @Test
+    void newTicketKeepsTheChosenPriorityAndIsStillOpen() {
+        Ticket ticket = new Ticket(1L, "Login button broken", "Nothing happens when clicking Login", TicketPriority.HIGH);
+
+        assertEquals(TicketPriority.HIGH, ticket.getPriority());
+        assertEquals(TicketStatus.OPEN, ticket.getStatus());
+    }
 }
